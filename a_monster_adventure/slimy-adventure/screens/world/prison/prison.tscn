@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://xwkkg3a7hp2x"]
+
+[ext_resource type="PackedScene" uid="uid://mgnrp1qhc7em" path="res://player.tscn" id="1_cbd4q"]
+[ext_resource type="Script" uid="uid://w8s4rlv83y4q" path="res://screens/world/prison/Area2d.cs" id="2_ptmdg"]
+[ext_resource type="Texture2D" uid="uid://m3nk3qmkkdk3" path="res://screens/world/prison/assets/fixtures_BA.png" id="3_kviv6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cbd4q"]
+a = Vector2(-165, 37)
+b = Vector2(173, 37)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bv44r"]
+a = Vector2(-20, 106)
+b = Vector2(-20, -208)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ptmdg"]
+a = Vector2(-151, -42)
+b = Vector2(189, -42)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kviv6"]
+a = Vector2(24, -155)
+b = Vector2(24, 160)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbd4q"]
+radius = 16.03122
+
+[node name="Prison" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_cbd4q")]
+position = Vector2(540, 285)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(539, 406)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, 36)
+shape = SubResource("SegmentShape2D_cbd4q")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-146, -32)
+shape = SubResource("SegmentShape2D_bv44r")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-17, -197)
+shape = SubResource("SegmentShape2D_ptmdg")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(147, -86)
+shape = SubResource("SegmentShape2D_kviv6")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(688, 188)
+script = ExtResource("2_ptmdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 4)
+shape = SubResource("CircleShape2D_cbd4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(0, 4)
+texture = ExtResource("3_kviv6")
+region_enabled = true
+region_rect = Rect2(160.5, 10, 32, 57)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="OnBodyExited"]

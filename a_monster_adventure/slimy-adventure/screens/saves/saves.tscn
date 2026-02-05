@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://ra8hexxs5nhw"]
+
+[ext_resource type="Script" uid="uid://7kdesa0jym6u" path="res://screens/saves/Saves.cs" id="1_gmttw"]
+
+[node name="saves" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gmttw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.5
+offset_top = -85.5
+offset_right = 169.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="SaveSlot1" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "save file"
+
+[node name="SaveSlot2" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "save file"
+
+[node name="SaveSlot3" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "save file"
+
+[node name="SaveSlot4" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "save file"
+
+[node name="back" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/back" to="." method="_on_back_pressed"]
