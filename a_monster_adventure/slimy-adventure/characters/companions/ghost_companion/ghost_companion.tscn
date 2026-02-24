@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://co4jh5uri7605"]
+
+[ext_resource type="Texture2D" uid="uid://bt2rxq1ojiy58" path="res://characters/companions/ghost_companion/tiny ghost.png" id="1_uuynx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ftct"]
+atlas = ExtResource("1_uuynx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hdyp6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ftct")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_hdyp6")
