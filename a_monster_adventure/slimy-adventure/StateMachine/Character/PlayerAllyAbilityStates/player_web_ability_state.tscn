@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://db0hvgb2v5t6p"]
+
+[ext_resource type="Script" uid="uid://dhinkl5pwt48m" path="res://StateMachine/Character/PlayerAllyAbilityStates/PlayerWebAbilityState.cs" id="1_ntaa6"]
+
+[node name="PlayerWebAbilityState" type="Node" node_paths=PackedStringArray("rayCast2D")]
+script = ExtResource("1_ntaa6")
+rayCast2D = NodePath("RayCast2D")
+metadata/_custom_type_script = "uid://dhinkl5pwt48m"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

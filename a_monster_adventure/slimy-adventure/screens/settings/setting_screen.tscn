@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy7yh6k2edaue"]
+[gd_scene load_steps=2 format=3 uid="uid://ctnfxm73nqvku"]
 
 [ext_resource type="Script" uid="uid://cd63cpq5ucidk" path="res://screens/settings/SettingScreen.cs" id="1_3tl6a"]
 

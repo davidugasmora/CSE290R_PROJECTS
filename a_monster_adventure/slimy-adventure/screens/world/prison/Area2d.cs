@@ -24,8 +24,7 @@ public partial class Area2d : Area2D
 	{
 		var global = GetNode<Global>("/root/Global");
 		global.NextScene = "res://screens/world/field/field.tscn";
-		GD.Print("Slime is trying to scape");
-		GetTree().ChangeSceneToFile("res://screens/loading/loading_screen.tscn");
+		GD.Print("Slime is trying to escape");
 	}
 
 	private void OnBodyEntered(Node2D body)

@@ -1,0 +1,143 @@
+[gd_scene load_steps=18 format=3 uid="uid://b5ukg5fe4xo3p"]
+
+[ext_resource type="Script" uid="uid://b28vpjv2hyymj" path="res://characters/guards/Guard.cs" id="1_aoykg"]
+[ext_resource type="Texture2D" uid="uid://ctjushx6xm0l4" path="res://art/This_Thing.png" id="2_aoykg"]
+[ext_resource type="Shader" uid="uid://cccvcfeu1amsy" path="res://characters/guards/guardLight.gdshader" id="4_28sy7"]
+[ext_resource type="Script" uid="uid://baofqvuexikko" path="res://StateMachine/Character/GuardStates/GuardChaseState.cs" id="4_cruxe"]
+[ext_resource type="Script" uid="uid://77qjrt34pg2b" path="res://characters/guards/guard_light_sub_viewport.gd" id="4_ierys"]
+[ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="5_ierys"]
+[ext_resource type="Script" uid="uid://dwcpryhjkb08v" path="res://StateMachine/Character/GuardStates/GuardPauseState.cs" id="5_lrhy8"]
+[ext_resource type="Script" uid="uid://dxvx4vfrdmnm5" path="res://StateMachine/Character/GuardStates/GuardPatrolState.cs" id="6_ay375"]
+[ext_resource type="Script" uid="uid://smvkfwp4l6pt" path="res://StateMachine/Character/GuardStates/GuardCatchState.cs" id="6_ioqu5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cruxe"]
+atlas = ExtResource("2_aoykg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lrhy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cruxe")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cruxe")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cruxe")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cruxe")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}]
+
+[sub_resource type="ImageTexture" id="ImageTexture_28sy7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ierys"]
+shader = ExtResource("4_28sy7")
+shader_parameter/arcAngle = 1.964
+
+[sub_resource type="Gradient" id="Gradient_w7pov"]
+colors = PackedColorArray(0, 0.6666667, 0.6666667, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d16qy"]
+gradient = SubResource("Gradient_w7pov")
+width = 1200
+height = 1200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay375"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrhy8"]
+radius = 50.0
+
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("raycast2D", "lightPivot") groups=["Guard"]]
+motion_mode = 1
+script = ExtResource("1_aoykg")
+raycast2D = NodePath("RayCast2D")
+lightPivot = NodePath("LightPivot")
+Speed = 250
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_lrhy8")
+animation = &"idle_left"
+
+[node name="LightPivot" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="LightPivot"]
+blend_mode = 1
+shadow_enabled = true
+texture = SubResource("ImageTexture_28sy7")
+
+[node name="SubViewport" type="SubViewport" parent="LightPivot" node_paths=PackedStringArray("point_light")]
+size = Vector2i(1200, 1200)
+render_target_update_mode = 4
+script = ExtResource("4_ierys")
+point_light = NodePath("../PointLight2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="LightPivot/SubViewport"]
+material = SubResource("ShaderMaterial_ierys")
+position = Vector2(600, 600)
+texture = SubResource("GradientTexture2D_d16qy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_ay375")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="CaptureArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaptureArea"]
+shape = SubResource("CircleShape2D_lrhy8")
+
+[node name="CharacterStateHandler" type="Node" parent="."]
+script = ExtResource("5_ierys")
+Active = true
+metadata/_custom_type_script = "uid://d12yksriwei62"
+
+[node name="GuardPatrolState" type="Node" parent="CharacterStateHandler" node_paths=PackedStringArray("navAgent")]
+script = ExtResource("6_ay375")
+navAgent = NodePath("../../NavigationAgent2D")
+metadata/_custom_type_script = "uid://dxvx4vfrdmnm5"
+
+[node name="GuardChaseState" type="Node" parent="CharacterStateHandler" node_paths=PackedStringArray("captureArea", "navAgent")]
+script = ExtResource("4_cruxe")
+captureArea = NodePath("../../CaptureArea")
+navAgent = NodePath("../../NavigationAgent2D")
+metadata/_custom_type_script = "uid://baofqvuexikko"
+
+[node name="GuardPauseState" type="Node" parent="CharacterStateHandler"]
+script = ExtResource("5_lrhy8")
+metadata/_custom_type_script = "uid://dwcpryhjkb08v"
+
+[node name="GuardCatchState" type="Node" parent="CharacterStateHandler"]
+script = ExtResource("6_ioqu5")
+metadata/_custom_type_script = "uid://smvkfwp4l6pt"

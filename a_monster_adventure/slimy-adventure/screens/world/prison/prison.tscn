@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://xwkkg3a7hp2x"]
 
-[ext_resource type="PackedScene" uid="uid://mgnrp1qhc7em" path="res://player.tscn" id="1_cbd4q"]
+[ext_resource type="PackedScene" uid="uid://mgnrp1qhc7em" path="res://characters/player.tscn" id="1_cbd4q"]
 [ext_resource type="Script" uid="uid://w8s4rlv83y4q" path="res://screens/world/prison/Area2d.cs" id="2_ptmdg"]
 [ext_resource type="Texture2D" uid="uid://m3nk3qmkkdk3" path="res://screens/world/prison/assets/fixtures_BA.png" id="3_kviv6"]
 

@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6y8h5xoghkgt"]
+
+[ext_resource type="Script" uid="uid://dbk7dhv76aeir" path="res://characters/allies/Ally.cs" id="1_ug7p0"]
+[ext_resource type="Texture2D" uid="uid://bb4xq1byxp73a" path="res://art/Nice_Thing.png" id="2_ej3vy"]
+[ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="3_3xgsk"]
+[ext_resource type="Script" uid="uid://dfp13l8miqkmy" path="res://StateMachine/Character/AllyStates/AllyFollowState.cs" id="3_ug7p0"]
+[ext_resource type="Script" uid="uid://drryb5tk1ty3m" path="res://StateMachine/Character/AllyStates/AllyIdleState.cs" id="4_e4opj"]
+[ext_resource type="Script" uid="uid://c0ny0s6vkbion" path="res://StateMachine/Character/AllyStates/AllyFleeState.cs" id="4_rebpd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hymoo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ej3vy")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ej3vy")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ej3vy")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ej3vy")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay375"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xgsk"]
+radius = 50.0
+
+[node name="Ally" type="CharacterBody2D" groups=["Prisoner"]]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_ug7p0")
+Speed = 275
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hymoo")
+animation = &"idle_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_ay375")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+neighbor_distance = 24256.88
+debug_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+
+[node name="CharacterStateHandler" type="Node" parent="."]
+script = ExtResource("3_3xgsk")
+Active = true
+metadata/_custom_type_script = "uid://d12yksriwei62"
+
+[node name="AllyIdleState" type="Node" parent="CharacterStateHandler" node_paths=PackedStringArray("joinArea")]
+script = ExtResource("4_e4opj")
+joinArea = NodePath("../../JoinArea")
+metadata/_custom_type_script = "uid://drryb5tk1ty3m"
+
+[node name="AllyFollowState" type="Node" parent="CharacterStateHandler" node_paths=PackedStringArray("navAgent")]
+script = ExtResource("3_ug7p0")
+navAgent = NodePath("../../NavigationAgent2D")
+metadata/_custom_type_script = "uid://dfp13l8miqkmy"
+
+[node name="AllyFleeState" type="Node" parent="CharacterStateHandler" node_paths=PackedStringArray("navAgent", "rayCast2D")]
+script = ExtResource("4_rebpd")
+navAgent = NodePath("../../NavigationAgent2D")
+rayCast2D = NodePath("../../RayCast2D")
+metadata/_custom_type_script = "uid://c0ny0s6vkbion"
+
+[node name="JoinArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JoinArea"]
+shape = SubResource("CircleShape2D_3xgsk")
