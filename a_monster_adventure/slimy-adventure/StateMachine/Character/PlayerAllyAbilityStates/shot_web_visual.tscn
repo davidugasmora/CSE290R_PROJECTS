@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://diucvhbxjk21e"]
+
+[ext_resource type="Script" uid="uid://c8wf1plkq4qot" path="res://StateMachine/Character/PlayerAllyAbilityStates/ShotWebVisual.cs" id="1_ofbwk"]
+[ext_resource type="Texture2D" uid="uid://b0l2t5ki8lmlc" path="res://art/Web.png" id="1_tg2nb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofbwk"]
+atlas = ExtResource("1_tg2nb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bk3s2"]
+load_path = "res://.godot/imported/Web.png-48d2221cbe1acb4bef145f836a53f0a0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxfs7"]
+atlas = SubResource("CompressedTexture2D_bk3s2")
+region = Rect2(0, 0, 16, 16)
+
+[node name="ShotWebVisual" type="Node2D" node_paths=PackedStringArray("webHead", "webTailTemplate")]
+visible = false
+script = ExtResource("1_ofbwk")
+webHead = NodePath("WebHead")
+webTailTemplate = NodePath("WebTail")
+
+[node name="WebHead" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_ofbwk")
+
+[node name="WebTail" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(32, 0)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_uxfs7")

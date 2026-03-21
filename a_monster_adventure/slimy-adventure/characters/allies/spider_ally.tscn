@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjgrgt8n4uuk6"]
+
+[ext_resource type="PackedScene" uid="uid://c6y8h5xoghkgt" path="res://characters/allies/ally.tscn" id="1_ghxai"]
+[ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="2_4q4av"]
+[ext_resource type="PackedScene" uid="uid://db0hvgb2v5t6p" path="res://StateMachine/Character/PlayerAllyAbilityStates/player_web_ability_state.tscn" id="3_wuxbe"]
+
+[node name="SpiderAlly" node_paths=PackedStringArray("abilityStateBranch") instance=ExtResource("1_ghxai")]
+abilityStateBranch = NodePath("AbilityStateBranch")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(0.42, 0.3528, 0.3528, 1)
+
+[node name="AbilityStateBranch" type="Node" parent="." index="6"]
+script = ExtResource("2_4q4av")
+metadata/_custom_type_script = "uid://d12yksriwei62"
+
+[node name="PlayerWebAbilityState" parent="AbilityStateBranch" index="0" instance=ExtResource("3_wuxbe")]
+inputName = "ability2"

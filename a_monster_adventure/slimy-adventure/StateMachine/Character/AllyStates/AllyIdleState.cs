@@ -20,6 +20,8 @@ public partial class AllyIdleState : CharacterState
 		joinArea.BodyEntered += BodyEnters;
 	}
 
+	
+
 	protected void BodyEnters(Node2D body)
 	{
 		if (!active)
@@ -32,7 +34,7 @@ public partial class AllyIdleState : CharacterState
 		}
 		else
 		{
-			(character as Ally).state = Ally.AllyStates.Follow;
+			(character as Ally).state = Ally.AllyStates.PerfectFollow;
 		}
 	}
 
@@ -41,8 +43,28 @@ public partial class AllyIdleState : CharacterState
 	public override void Enter()
 	{
 		base.Enter();
-		player = (character as Ally).player;
+		(character as Character).velocity = Vector2.Zero;
+		player = (character as Ally).getPlayer();
+		Global.Instance.Connect("AlertGuards",new Callable(this,"PrepareFlee"));
+		if (character != null) (character as Character).animation_name = "idle_";
 
+	}
+
+    public override void Exit()
+    {
+        base.Exit();
+		Global.Instance.Disconnect("AlertGuards",new Callable(this,"PrepareFlee"));
+
+    }
+
+
+	public void PrepareFlee(Vector2 alertPosition, Character spottedPrisoner)
+	{
+		GD.Print("Ally flees");
+		if (spottedPrisoner == (character as Ally))
+		{
+			(character as Ally).state = Ally.AllyStates.Flee;
+		}
 	}
 
 }

@@ -35,6 +35,7 @@ public partial class State : StateCondition
 
 	public virtual void Exit()
 	{
+		GD.Print("Exit: ", Name);
 		active = false;
 		enteredParent = null;
 		SetProcess(false);

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckcn2mwokv4bd"]
+
+[ext_resource type="Script" uid="uid://cmktlrftm3kww" path="res://StateMachine/Character/GuardStates/PrisonerCaptureVisual.cs" id="1_o67ee"]
+[ext_resource type="Texture2D" uid="uid://cqgnxeek3v224" path="res://icon.svg" id="1_rgi8v"]
+
+[node name="PrisonerCaptureVisual" type="Node2D" node_paths=PackedStringArray("animatedSprite", "cagePositionNode")]
+script = ExtResource("1_o67ee")
+animatedSprite = NodePath("AnimatedSprite2D")
+cagePositionNode = NodePath("CagePosNode")
+
+[node name="CageBack" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+texture = ExtResource("1_rgi8v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+
+[node name="CageFront" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.41568628)
+position = Vector2(0, -100)
+texture = ExtResource("1_rgi8v")
+
+[node name="CagePosNode" type="Node2D" parent="."]
+position = Vector2(0, -100)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="CagePosNode"]
+remote_path = NodePath("../../CageBack")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="CagePosNode"]
+remote_path = NodePath("../../CageFront")
+
+[node name="Camera2D" type="Camera2D" parent="."]

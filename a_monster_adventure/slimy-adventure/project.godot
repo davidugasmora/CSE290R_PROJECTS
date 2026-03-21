@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="Slimy_Adventure"
-run/main_scene="uid://xwkkg3a7hp2x"
+run/main_scene="uid://de57g85b50dkh"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Global.cs"
+PauseMenu="*res://screens/world/pause_menu/pause_menu.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [dotnet]
 
@@ -27,6 +33,8 @@ project/assembly_name="Slimy_Adventure"
 
 Prisoner=""
 Guard=""
+Player=""
+Enemy=""
 
 [input]
 

@@ -20,6 +20,7 @@ public partial class StateHandler : Node
 
 	private Array<State> activeStates = [];
 	private Array<State> statesToDeactivate = [];
+	private Array<State> statesToActivate = [];
 	private bool ExploreStateTree(Node currentNode)
 	{
 		foreach (Node child in currentNode.GetChildren())
@@ -61,7 +62,7 @@ public partial class StateHandler : Node
 					State childState = childStateCondition as State;
 					
 					if (!childState.active)
-						childState.Enter();
+						statesToActivate.Add(childState);
 					
 					activeStates.Add(childState);
 					if (statesToDeactivate.Contains(childState)) 
@@ -85,6 +86,7 @@ public partial class StateHandler : Node
 	public void DoStateMachine()
 	{
 		statesToDeactivate = activeStates.Duplicate();
+		statesToActivate.Clear();
 		activeStates.Clear();
 
 		ExploreStateTree(this);
@@ -92,6 +94,11 @@ public partial class StateHandler : Node
 		foreach (State stateToDeactivate in statesToDeactivate)
 			if (stateToDeactivate.active) 
 				stateToDeactivate.Exit();
+
+		
+		foreach (State stateToActivate in statesToActivate)
+			if (!stateToActivate.active)
+				stateToActivate.Enter();
 	}
 
 	public override void _Process(double delta)

@@ -7,7 +7,9 @@ public partial class PlayerGenericAbilityState : CharacterState
 	[Export]
 	public float cooldownTime {get; set;} = 1.0f;
 
-	protected string inputName = "ability1";
+	[Export]
+	public  string inputName = "ability1";
+
 	public Timer cooldownTimer;
 	public bool timedOut = true;
 

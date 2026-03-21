@@ -12,19 +12,28 @@ public partial class AllyFleeState : CharacterState
 	public NavigationAgent2D navAgent { get; set;} = null;
 	[Export]
 	public RayCast2D rayCast2D {get; set;} = null;
-	private Line2D line = null;
+	// private Line2D line = null;
 
 	public override bool EvaluateStateCondition()
     {
 		return (character as Ally).state == Ally.AllyStates.Flee;
     }
 
+	private Timer idleTimer;
+
 	public override void _Ready()
 	{
 
-		line = new Line2D();
-		AddChild(line);
-		line.Width = 1.0f;
+		// line = new Line2D();
+		// AddChild(line);
+		// line.Width = 1.0f;
+
+		
+		idleTimer = new Timer();
+		idleTimer.WaitTime = 1.0;
+		idleTimer.OneShot = true;
+		idleTimer.Timeout += stoppedFleeing;
+		AddChild(idleTimer);
 		
 		base._Ready();
 	}
@@ -32,9 +41,16 @@ public partial class AllyFleeState : CharacterState
 	public override void Enter()
 	{
 		base.Enter();
+		idleTimer.Start();
 		findFleePath();
+		if (character != null) (character as Character).animation_name = "walk_";
 	}
-	
+
+    public override void Exit()
+    {
+        base.Exit();
+		idleTimer.Stop();
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -44,8 +60,14 @@ public partial class AllyFleeState : CharacterState
 		
 	}
 
-	private float guardDistanceThreshold = 500.0f;
+	private float guardDistanceThreshold = 600.0f;
 	private float explorationDistance = 1000.0f;
+
+	private void stoppedFleeing()
+	{
+		(character as Ally).state = Ally.AllyStates.Idle;
+	}
+
 	private void findFleePath(int iteration = 0)
 	{
 
@@ -66,6 +88,12 @@ public partial class AllyFleeState : CharacterState
 		for (int i = 0; i < numberOfItems; i++)
 		{
 			averageFleeVector += -guardDirections[i] * weights[i];
+		}
+
+		if (averageFleeVector == Vector2.Zero)
+		{
+			if (idleTimer.IsStopped()) idleTimer.Start();
+			return;
 		}
 
 		Vector2 fleeDirection = averageFleeVector.Normalized();
@@ -102,9 +130,10 @@ public partial class AllyFleeState : CharacterState
 
 		rayCast2D.Position = Vector2.Zero;
 
-		line.Points = linePoints.ToArray();
+		// line.Points = linePoints.ToArray();
 
 		if (!navAgent.IsTargetReachable() && iteration < 3) findFleePath(iteration+1);
+		if (!idleTimer.IsStopped()) idleTimer.Stop();
 	}
 
 	protected virtual void Flee(double delta)
@@ -117,6 +146,7 @@ public partial class AllyFleeState : CharacterState
 		Vector2 direction = (navAgent.GetNextPathPosition() - character.GlobalPosition).Normalized();
 		
 		(character as Character).velocity = direction * (character as Character).Speed;
+		Global.Instance.allyDict[(character as Ally).id]["position"] = character.GlobalPosition;
 
 		
 

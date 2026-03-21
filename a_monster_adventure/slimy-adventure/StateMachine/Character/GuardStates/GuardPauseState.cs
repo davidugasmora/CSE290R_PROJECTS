@@ -7,9 +7,9 @@ public partial class GuardPauseState : CharacterState
 {
 
 	public override bool EvaluateStateCondition()
-    {
+	{
 		return (character as Guard).state == Guard.GuardStates.Pause;
-    }
+	}
 
 	[Export]
 	public float pauseTimer { get; set; } = 2.0f;
@@ -38,7 +38,7 @@ public partial class GuardPauseState : CharacterState
 
 		if (seesPrisoner) 
 		{
-			Global.instance.EmitSignal(Global.SignalName.AlertGuards, (character as Guard)._targetPrisoner);
+			Global.Instance.EmitSignal("AlertGuards", (character as Guard)._targetPrisoner.GlobalPosition, (character as Guard)._targetPrisoner);
 			timer.Stop();
 			(character as Guard).state = Guard.GuardStates.Chase;
 		}
@@ -49,6 +49,7 @@ public partial class GuardPauseState : CharacterState
 		base.Enter();
 		timer.Start();
 		(character as Character).velocity = Vector2.Zero;
+		if (character != null) (character as Character).animation_name = "idle_";
 	}
 	
 	public override void _Process(double delta)

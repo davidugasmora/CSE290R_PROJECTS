@@ -29,6 +29,20 @@ public partial class GuardChaseState : CharacterState
 		captureArea.BodyEntered += BodyEnters;
 	}
 
+    public override void Enter()
+    {
+        base.Enter();
+		if (character != null) (character as Character).animation_name = "walk_";
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+		(character as Character).velocity = Vector2.Zero;
+    }
+
+
+
 	public override bool EvaluateStateCondition()
     {
 		return (character as Guard).state == Guard.GuardStates.Chase;
@@ -47,11 +61,13 @@ public partial class GuardChaseState : CharacterState
 		else
 		{
 			(character as Guard).state = Guard.GuardStates.Catch;
+			timer.Stop();
 		}
 	}
 
 	protected void lostPlayer()
 	{
+		(character as Guard)._targetPrisoner = null;
 		(character as Guard).state = Guard.GuardStates.Pause;
 	}
 	
@@ -79,6 +95,14 @@ public partial class GuardChaseState : CharacterState
 
 	protected virtual void Chase(double delta)
 	{
+		
+		if (!(character as Guard).prisonerExists((character as Guard)._targetPrisoner))
+		{
+			lostPlayer();
+			timer.Stop();
+			return;
+		}
+		
 		Character prisoner = (character as Guard)._targetPrisoner;
 		navAgent.TargetPosition = prisoner.GlobalPosition;
 		

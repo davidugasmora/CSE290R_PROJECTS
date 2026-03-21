@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctnfxm73nqvku"]
+[gd_scene load_steps=8 format=3 uid="uid://bdjw1vpgqiai4"]
 
+[ext_resource type="FontFile" uid="uid://dqrnbf7dfsfw1" path="res://art/fonts/ThaleahFat.ttf" id="1_2flr8"]
 [ext_resource type="Script" uid="uid://cd63cpq5ucidk" path="res://screens/settings/SettingScreen.cs" id="1_3tl6a"]
+[ext_resource type="Texture2D" uid="uid://dgp704psscvrl" path="res://art/BackgroundSlime.png" id="2_cs2w3"]
+[ext_resource type="Texture2D" uid="uid://bogg6wfa7xfhr" path="res://art/menu_panel.tres" id="4_nokvj"]
+[ext_resource type="Texture2D" uid="uid://d3flpeio8ih5r" path="res://art/NewGame.tres" id="5_xl3sp"]
+[ext_resource type="Script" uid="uid://bu62r62qfkeou" path="res://screens/main_menu/Button.cs" id="6_la2bd"]
+
+[sub_resource type="Theme" id="Theme_xxcts"]
+default_font = ExtResource("1_2flr8")
+default_font_size = 25
 
 [node name="setting_screen" type="Control"]
 layout_mode = 3
@@ -9,30 +18,139 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_xxcts")
 script = ExtResource("1_3tl6a")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -71.0
+offset_right = 46.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cs2w3")
+expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="MenuFrame" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -111.0
+offset_right = 239.0
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_nokvj")
+expand_mode = 1
 
-[node name="screen" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Screen"
+[node name="sound" type="TextureButton" parent="MenuFrame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21146956
+anchor_top = 0.5947581
+anchor_right = 0.7928649
+anchor_bottom = 0.7125591
+offset_left = 0.723999
+offset_top = -151.29639
+offset_right = 0.723999
+offset_bottom = -126.58171
+texture_normal = ExtResource("5_xl3sp")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_la2bd")
 
-[node name="sound" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Sound"
+[node name="Label" type="Label" parent="MenuFrame/sound"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.72095
+offset_top = -22.5
+offset_right = 84.27905
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sound: On"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="gameplay" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Gameplay"
+[node name="font_mode" type="TextureButton" parent="MenuFrame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21146956
+anchor_top = 0.5947581
+anchor_right = 0.7928649
+anchor_bottom = 0.7125591
+offset_left = 2.723999
+offset_top = -68.29639
+offset_right = 2.723999
+offset_bottom = -43.58171
+texture_normal = ExtResource("5_xl3sp")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_la2bd")
 
-[node name="back" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Back"
+[node name="Label" type="Label" parent="MenuFrame/font_mode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -22.0
+offset_right = 86.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LIGHT MODE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/back" to="." method="_on_back_pressed"]
+[node name="back" type="TextureButton" parent="MenuFrame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21146956
+anchor_top = 0.5947581
+anchor_right = 0.7928649
+anchor_bottom = 0.7125591
+offset_left = 0.723999
+offset_top = 12.703613
+offset_right = 0.723999
+offset_bottom = 37.41829
+texture_normal = ExtResource("5_xl3sp")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_la2bd")
+
+[node name="Label" type="Label" parent="MenuFrame/back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.72095
+offset_top = -21.5
+offset_right = 85.27905
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="MenuFrame/back" to="." method="_on_back_pressed"]

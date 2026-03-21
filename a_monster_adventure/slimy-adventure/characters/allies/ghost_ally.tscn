@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://deqykafkvcrkt"]
+
+[ext_resource type="PackedScene" uid="uid://c6y8h5xoghkgt" path="res://characters/allies/ally.tscn" id="1_1bbiq"]
+[ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="2_mopgy"]
+[ext_resource type="Script" uid="uid://cpqtuw31cp3li" path="res://StateMachine/Character/PlayerAllyAbilityStates/PlayerInvisibilityAbilityState.cs" id="3_tle8y"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjihb"]
+blend_mode = 1
+
+[node name="GhostAlly" node_paths=PackedStringArray("abilityStateBranch") instance=ExtResource("1_1bbiq")]
+abilityStateBranch = NodePath("AbilityStateBranch")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(1, 1, 1, 0.43137255)
+material = SubResource("CanvasItemMaterial_hjihb")
+
+[node name="AbilityStateBranch" type="Node" parent="." index="6"]
+script = ExtResource("2_mopgy")
+metadata/_custom_type_script = "uid://d12yksriwei62"
+
+[node name="PlayerInvisibilityAbilityState" type="Node" parent="AbilityStateBranch" index="0"]
+script = ExtResource("3_tle8y")
+cooldownTime = 10.0
+metadata/_custom_type_script = "uid://cpqtuw31cp3li"

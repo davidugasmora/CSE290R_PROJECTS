@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://dggyqwamdiv4s"]
+[gd_scene load_steps=2 format=3 uid="uid://dggyqwamdiv4s"]
+
+[ext_resource type="Script" uid="uid://dal76w0syjh81" path="res://screens/endings/bad_ending/BadEnding.cs" id="1_i5djl"]
 
 [node name="BadEnding" type="Node2D"]
+script = ExtResource("1_i5djl")

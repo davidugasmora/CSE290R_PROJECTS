@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://db0hvgb2v5t6p"]
+[gd_scene load_steps=3 format=3 uid="uid://db0hvgb2v5t6p"]
 
 [ext_resource type="Script" uid="uid://dhinkl5pwt48m" path="res://StateMachine/Character/PlayerAllyAbilityStates/PlayerWebAbilityState.cs" id="1_ntaa6"]
+[ext_resource type="PackedScene" uid="uid://diucvhbxjk21e" path="res://StateMachine/Character/PlayerAllyAbilityStates/shot_web_visual.tscn" id="2_01iys"]
 
-[node name="PlayerWebAbilityState" type="Node" node_paths=PackedStringArray("rayCast2D")]
+[node name="PlayerWebAbilityState" type="Node" node_paths=PackedStringArray("rayCast2D", "webVisual")]
 script = ExtResource("1_ntaa6")
 rayCast2D = NodePath("RayCast2D")
+webVisual = NodePath("ShotWebVisual")
+cooldownTime = 10.0
 metadata/_custom_type_script = "uid://dhinkl5pwt48m"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="ShotWebVisual" parent="." instance=ExtResource("2_01iys")]

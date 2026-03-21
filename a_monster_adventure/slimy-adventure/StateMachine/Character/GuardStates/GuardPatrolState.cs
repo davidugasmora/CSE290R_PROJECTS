@@ -30,10 +30,28 @@ public partial class GuardPatrolState : CharacterState
 			line2D = (character as Guard).line2D;
 			
 			if (line2D != null)
-				GetClosestPoint();
+				GetRandomPoint();//GetClosestPoint();
+		}
+		Global.Instance.Connect("AlertGuards",new Callable(this,"PrepareInvestigate"));
+		if (character != null) (character as Character).animation_name = "walk_";
+	}
+
+    public override void Exit()
+    {
+        base.Exit();
+		Global.Instance.Disconnect("AlertGuards",new Callable(this,"PrepareInvestigate"));
+    }
+
+
+	public void PrepareInvestigate(Vector2 alertPosition, Character spottedPrisoner = null)
+	{
+		float distanceFromAlert = (character.GlobalPosition - alertPosition).Length();
+		if (distanceFromAlert <= (character as Guard).alertRadius)
+		{
+			(character as Guard).investigatePos = alertPosition;
+			(character as Guard).state = Guard.GuardStates.Investigate;
 		}
 	}
-	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -45,6 +63,7 @@ public partial class GuardPatrolState : CharacterState
 			MoveToPoint(delta);
 
 			AttemptGetNextPoint();
+			if (character != null) (character as Character).animation_name = "walk_";
 		}
 		
 	}
@@ -56,10 +75,12 @@ public partial class GuardPatrolState : CharacterState
 
 		if (seesPrisoner) 
 		{
-			Global.instance.EmitSignal(Global.SignalName.AlertGuards, (character as Guard)._targetPrisoner);
+			Global.Instance.EmitSignal("AlertGuards", (character as Guard)._targetPrisoner.GlobalPosition, (character as Guard)._targetPrisoner);
 			(character as Guard).state = Guard.GuardStates.Chase;
 		}
 	}
+
+	// protected virtual void ListenForAlert
 
 	protected virtual void MoveToPoint(double delta)
 	{
@@ -134,6 +155,15 @@ public partial class GuardPatrolState : CharacterState
 		}
 		
 		pointIndex = closestPointIndex;
+
+		currentPoint = line2D.GlobalPosition + points[pointIndex];
+		navAgent.TargetPosition = currentPoint;
+	}
+
+	protected virtual void GetRandomPoint()
+	{
+		Vector2[] points = line2D.Points;
+		pointIndex = GD.RandRange(0,points.Length - 1);
 
 		currentPoint = line2D.GlobalPosition + points[pointIndex];
 		navAgent.TargetPosition = currentPoint;

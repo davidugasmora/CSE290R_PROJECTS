@@ -1,16 +1,16 @@
-[gd_scene load_steps=11 format=4 uid="uid://b2ga1w0a1gl4u"]
+[gd_scene load_steps=12 format=4 uid="uid://b2ga1w0a1gl4u"]
 
 [ext_resource type="Texture2D" uid="uid://cqgnxeek3v224" path="res://icon.svg" id="1_xsbjg"]
 [ext_resource type="Texture2D" uid="uid://b6bqro0uqen65" path="res://art/Yes.png" id="2_lb3c3"]
-[ext_resource type="PackedScene" uid="uid://mgnrp1qhc7em" path="res://characters/player.tscn" id="3_qi33t"]
-[ext_resource type="PackedScene" uid="uid://c6y8h5xoghkgt" path="res://characters/allies/ally.tscn" id="4_a61lo"]
-[ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="5_tolds"]
-[ext_resource type="PackedScene" uid="uid://db0hvgb2v5t6p" path="res://StateMachine/Character/PlayerAllyAbilityStates/player_web_ability_state.tscn" id="6_0o2ua"]
+[ext_resource type="Script" uid="uid://d0k05kwyvlx37" path="res://screens/world/instantiators/ImprisonedAllyInstantiator.cs" id="3_2co76"]
+[ext_resource type="Script" uid="uid://bbn5gau0ofq25" path="res://screens/world/instantiators/LostAllyInstantiator.cs" id="3_dvypq"]
+[ext_resource type="Script" uid="uid://q8ir443rjxtp" path="res://screens/world/instantiators/PlayerInstantiator.cs" id="5_xsbjg"]
+[ext_resource type="Script" uid="uid://bscfndagpaq7i" path="res://screens/world/WorldScenePortal.cs" id="6_xsbjg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_uyt2b"]
-vertices = PackedVector2Array(808, 296, 1095.8438, 296, 1086.6875, 810.64844, 808, 552, -877.40625, 843.34375, 216, 552, -883.7031, 232, -488, 232, -488, 488, 216, 488, -885.84375, 24, -886.3281, -24, -280, -24, -280, 24, 600, -344, 600, -168, 424, -168, 424, -232, 744, -24, 744, -88, 920, -88, 920, 88, 744, 88, 744, 24, 280, -24, 280, 24, 424, 232, 424, 168, 600, 168, 600, 344, 424, 344, 424, 280, 280, 232, -280, 280, 280, -232, -280, -280, 424, -280, 424, -344, 1106.3516, -296, 808, -296, 808, -552, 1114.3125, -744.60156, -894.5625, -825.34375, 216, -552, 216, -488, -488, -488, -888.46875, -232, -488, -232)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(4, 6, 7, 8), PackedInt32Array(5, 4, 8, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(21, 22, 23), PackedInt32Array(18, 21, 23), PackedInt32Array(24, 18, 23, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(29, 30, 31), PackedInt32Array(26, 29, 31), PackedInt32Array(32, 26, 31, 33), PackedInt32Array(32, 33, 13, 25), PackedInt32Array(24, 25, 13, 12), PackedInt32Array(34, 24, 12, 35), PackedInt32Array(34, 35, 36, 17), PackedInt32Array(14, 17, 36), PackedInt32Array(14, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 41, 40, 43), PackedInt32Array(43, 44, 45, 42), PackedInt32Array(46, 42, 45, 47)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-935, -867, 1155, -783, 1126, 850, -917, 884)])
+vertices = PackedVector2Array(1088.8984, 704.3672, 508.8672, 552, 808, 552, 1096.0703, 296, 808, 296, -987.10156, 24, -989.1094, -24, -280, -24, -280, 24, 600, -344, 600, -168, 424, -168, 424, -232, 744, -24, 744, -88, 920, -88, 920, 88, 744, 88, 744, 24, 280, -24, 280, 24, 424, 232, 424, 168, 600, 168, 600, 344, 424, 344, 424, 280, 280, 232, -280, 280, 280, -232, -280, -280, 424, -280, 424, -344, -488, 290.1172, -709.27344, 232, -488, 232, -488, -232, -721.3594, -232, -488, -295.3672, 808, -552, 456.9922, -552, 1114.0703, -730.4375, 1106.4531, -296, 808, -296)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(16, 17, 18), PackedInt32Array(13, 16, 18), PackedInt32Array(19, 13, 18, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(24, 25, 26), PackedInt32Array(21, 24, 26), PackedInt32Array(27, 21, 26, 28), PackedInt32Array(27, 28, 8, 20), PackedInt32Array(19, 20, 8, 7), PackedInt32Array(29, 19, 7, 30), PackedInt32Array(29, 30, 31, 12), PackedInt32Array(9, 12, 31), PackedInt32Array(9, 31, 32), PackedInt32Array(33, 34, 35), PackedInt32Array(36, 37, 38), PackedInt32Array(39, 40, 41), PackedInt32Array(39, 41, 42, 43)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1036, -188, 1155, -783, 1128, 756, -1019, 192)])
 agent_radius = 40.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tulln"]
@@ -31,6 +31,9 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ycy2o")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsbjg"]
+size = Vector2(20, 100)
+
 [node name="AllyTestScene_tscn" type="Node2D"]
 
 [node name="Icon" type="Sprite2D" parent="."]
@@ -46,22 +49,42 @@ scale = Vector2(8, 8)
 tile_map_data = PackedByteArray("AAD6//r/AAAAAAAAAAD6//v/AAAAAAAAAAD6//z/AAAAAAAAAAD6//3/AAAAAAAAAAD6//7/AAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD7/wUAAAAAAAAAAAD8/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAADw/wEAAAAAAAAAAADw/wIAAAAAAAAAAADx/wEAAAAAAAAAAADx/wIAAAAAAAAAAADy/wEAAAAAAAAAAADy/wIAAAAAAAAAAADz/wEAAAAAAAAAAADz/wIAAAAAAAAAAAD0/wEAAAAAAAAAAAD0/wIAAAAAAAAAAAD1/wEAAAAAAAAAAAD1/wIAAAAAAAAAAAD2/wEAAAAAAAAAAAD2/wIAAAAAAAAAAAD3/wEAAAAAAAAAAAD3/wIAAAAAAAAAAAD4/wEAAAAAAAAAAAD4/wIAAAAAAAAAAAD5/wEAAAAAAAAAAAD5/wIAAAAAAAAAAADw//3/AAAAAAAAAADw//7/AAAAAAAAAADx//3/AAAAAAAAAADx//7/AAAAAAAAAADy//3/AAAAAAAAAADy//7/AAAAAAAAAADz//3/AAAAAAAAAADz//7/AAAAAAAAAAD0//3/AAAAAAAAAAD0//7/AAAAAAAAAAD1//3/AAAAAAAAAAD1//7/AAAAAAAAAAD2//3/AAAAAAAAAAD2//7/AAAAAAAAAAD3//3/AAAAAAAAAAD3//7/AAAAAAAAAAD4//3/AAAAAAAAAAD4//7/AAAAAAAAAAD5//3/AAAAAAAAAAD5//7/AAAAAAAAAAD5/wMAAAAAAAAAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD9/wYAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAD5//r/AAAAAAAAAAD5//v/AAAAAAAAAAD5//z/AAAAAAAAAAD5//n/AAAAAAAAAAD6//n/AAAAAAAAAAD7//n/AAAAAAAAAAD7//r/AAAAAAAAAAD8//n/AAAAAAAAAAD8//r/AAAAAAAAAAD9//n/AAAAAAAAAAD9//r/AAAAAAAAAAD+//n/AAAAAAAAAAD+//r/AAAAAAAAAAD///n/AAAAAAAAAAD///r/AAAAAAAAAAAAAPn/AAAAAAAAAAAAAPr/AAAAAAAAAAABAPn/AAAAAAAAAAABAPr/AAAAAAAAAAACAPn/AAAAAAAAAAACAPr/AAAAAAAAAAADAPn/AAAAAAAAAAADAPr/AAAAAAAAAAAEAPn/AAAAAAAAAAAEAPr/AAAAAAAAAAAFAPn/AAAAAAAAAAAFAPr/AAAAAAAAAAAGAPn/AAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAP3/AAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAEAAAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAPn/AAAAAAAAAAAIAPn/AAAAAAAAAAAJAPn/AAAAAAAAAAAKAPn/AAAAAAAAAAAKAPr/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAAEAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAPv/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAALAP3/AAAAAAAAAAALAAIAAAAAAAAAAAAMAP3/AAAAAAAAAAAMAAIAAAAAAAAAAAANAP3/AAAAAAAAAAANAAIAAAAAAAAAAAAOAP3/AAAAAAAAAAAOAAIAAAAAAAAAAAAPAP3/AAAAAAAAAAAPAP7/AAAAAAAAAAAPAP//AAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAEAPj/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAJAPj/AAAAAAAAAAAKAPj/AAAAAAAAAAALAPj/AAAAAAAAAAALAPn/AAAAAAAAAAALAPr/AAAAAAAAAAALAPv/AAAAAAAAAAALAPz/AAAAAAAAAAAMAPz/AAAAAAAAAAANAPz/AAAAAAAAAAAOAPz/AAAAAAAAAAAPAPz/AAAAAAAAAAAQAPz/AAAAAAAAAAAQAP3/AAAAAAAAAAAPAAMAAAAAAAAAAAAQAP7/AAAAAAAAAAAQAP//AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_n3s4u")
 
-[node name="Player" parent="." instance=ExtResource("3_qi33t")]
-position = Vector2(-23, -16)
+[node name="Node2D" type="Area2D" parent="."]
+position = Vector2(-509, 0)
+script = ExtResource("6_xsbjg")
+sceneName = "GuardTest"
 
-[node name="Ally" parent="." node_paths=PackedStringArray("player", "abilityStateBranch") instance=ExtResource("4_a61lo")]
-position = Vector2(506, -258)
-player = NodePath("../Player")
-abilityStateBranch = NodePath("")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+shape = SubResource("RectangleShape2D_xsbjg")
 
-[node name="Camera2D" type="Camera2D" parent="Ally"]
-enabled = false
-position_smoothing_enabled = true
+[node name="Y-Sort" type="Node2D" parent="."]
 
-[node name="CharacterStateHandler2" type="Node" parent="Ally"]
-script = ExtResource("5_tolds")
-metadata/_custom_type_script = "uid://d12yksriwei62"
+[node name="LostAllyInstantiator" type="Node2D" parent="Y-Sort"]
+script = ExtResource("3_dvypq")
+metadata/_custom_type_script = "uid://bbn5gau0ofq25"
 
-[node name="PlayerWebAbilityState" parent="Ally/CharacterStateHandler2" instance=ExtResource("6_0o2ua")]
-cooldownTime = 10.0
-exclusivity = 2
+[node name="ImprisonedAllyInstantiator" type="Node2D" parent="Y-Sort"]
+position = Vector2(510, -255)
+script = ExtResource("3_2co76")
+metadata/_custom_type_script = "uid://d0k05kwyvlx37"
+
+[node name="ImprisonedAllyInstantiator2" type="Node2D" parent="Y-Sort"]
+position = Vector2(835, 0)
+script = ExtResource("3_2co76")
+allyId = 1
+metadata/_custom_type_script = "uid://d0k05kwyvlx37"
+
+[node name="ImprisonedAllyInstantiator3" type="Node2D" parent="Y-Sort"]
+position = Vector2(510, 255)
+script = ExtResource("3_2co76")
+allyId = 2
+metadata/_custom_type_script = "uid://d0k05kwyvlx37"
+
+[node name="PlayerInstantiator" type="Node2D" parent="Y-Sort" node_paths=PackedStringArray("allySpawnNode2d")]
+position = Vector2(-380, 0)
+script = ExtResource("5_xsbjg")
+allySpawnNode2d = NodePath("AllySpawn")
+metadata/_custom_type_script = "uid://q8ir443rjxtp"
+
+[node name="AllySpawn" type="Node2D" parent="Y-Sort/PlayerInstantiator"]
+position = Vector2(-130, 0)
