@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class GuardCatchState : CharacterState
@@ -59,11 +60,11 @@ public partial class GuardCatchState : CharacterState
 		(character as Guard)._targetPrisoner = null;
 	}
 
-	public void endCatch()
+	public async Task endCatch()
 	{
 		if (caughtPrisonerIsPlayer)
 		{
-			Global.Instance.TransitionWorldScene("Prison",0);
+			await Global.Instance.TransitionWorldScene("Prison",0);
 		}
 		(character as Guard).state = Guard.GuardStates.Pause;
 	}

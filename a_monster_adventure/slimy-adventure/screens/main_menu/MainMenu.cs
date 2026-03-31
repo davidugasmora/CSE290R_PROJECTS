@@ -4,15 +4,21 @@ using System.Threading.Tasks;
 
 public partial class MainMenu : Control
 {
-	private async void _on_new_game_pressed()
+    public override void _Ready()
     {
-        Global.Instance.NextScene = "res://screens/world/prison/prison.tscn";
-        await Global.Instance.TransitionScene("LoadingScreen");
+        GD.Print($"¿Está el árbol pausado?: {GetTree().Paused}");
     }
+
+	private async void _on_new_game_pressed()
+	{
+		
+		await Global.Instance.TransitionWorldScene("Prison",0);
+	}
 
 	private void _on_load_game_pressed()
 	{
-		
+		GD.Print("Load button pressed.");
+		Global.Instance.LoadGame();
 	}
 
 	private void _on_settings_pressed()

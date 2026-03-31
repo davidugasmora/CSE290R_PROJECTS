@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://icyl3b0abemk"]
+[gd_scene load_steps=3 format=3 uid="uid://cwlpoeqhl2wqs"]
 
 [ext_resource type="Script" uid="uid://wgurg0xqahuj" path="res://screens/world/field/BridgeSensor.cs" id="1_l6snc"]
 
@@ -9,7 +9,6 @@ size = Vector2(22, 2)
 script = ExtResource("1_l6snc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1005, 85)
 shape = SubResource("RectangleShape2D_bftc6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

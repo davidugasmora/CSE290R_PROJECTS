@@ -16,7 +16,7 @@ public partial class Prison : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(_isPlayerNearby && Input.IsActionJustPressed("ui_accept"))
+		if(_isPlayerNearby && Input.IsActionJustPressed("interact"))
 		{
 			Escape();
 		}
@@ -24,8 +24,8 @@ public partial class Prison : Area2D
 
 	private async void Escape()
 	{
-		Global.Instance.NextScene = NextScenePath;
-		await Global.Instance.TransitionScene("LoadingScreen");
+		// Point to the key in sceneDict, e.g., "Field" (make sure "Field" is in your sceneDict!)
+		await Global.Instance.TransitionScene("Field"); 
 		_isPlayerNearby = false;
 		GD.Print("Slime is trying to escape");
 	}

@@ -11,7 +11,7 @@ public partial class Character : CharacterBody2D
 	public bool detectable = true;
 
 	[Export]
-	public int Speed { get; set; } = 200;
+	public int Speed { get; set; } = 250;
 	
 	public String facingDirection = "down";
 	public String animation_name = "idle_";

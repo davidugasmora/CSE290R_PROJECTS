@@ -3,13 +3,10 @@ using System;
 using System.Threading.Tasks;
 
 [GlobalClass]
-public partial class WorldScenePortal : Area2D
+public partial class EndingScenePortal : Area2D
 {
-
 	[Export]
 	public string sceneName = "";
-	[Export]
-	public int playerInstantiatorId = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -35,6 +32,6 @@ public partial class WorldScenePortal : Area2D
 
 	public async Task changeScene()
 	{
-		await Global.Instance.TransitionWorldScene(sceneName, playerInstantiatorId);
+		await Global.Instance.TransitionScene(sceneName);
 	}
 }

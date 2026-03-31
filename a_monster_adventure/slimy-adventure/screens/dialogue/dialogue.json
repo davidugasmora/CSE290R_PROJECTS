@@ -1,0 +1,20 @@
+{
+	"start" : [
+		"This is the first textbox",
+		"This is the second textbox",
+		"This is the third textbox",
+		"This is the fourth textbox",
+	],
+	"world" : [
+		"This is the first textbox",
+		"This is the second textbox",
+		"This is the third textbox",
+		"This is the fourth textbox",
+	],
+	"ending" : [
+		"This is the first textbox",
+		"This is the second textbox",
+		"This is the third textbox",
+		"This is the fourth textbox",
+	]
+}

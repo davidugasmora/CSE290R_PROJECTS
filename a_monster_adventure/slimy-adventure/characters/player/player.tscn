@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://mgnrp1qhc7em"]
+[gd_scene load_steps=55 format=3 uid="uid://mgnrp1qhc7em"]
 
 [ext_resource type="Script" uid="uid://bi2g7vuqu0rfv" path="res://characters/player/Player.cs" id="1_j31ep"]
 [ext_resource type="Texture2D" uid="uid://6wdpr47kk20a" path="res://art/CuteSlime_Jiggle.png" id="2_dirf7"]
 [ext_resource type="Texture2D" uid="uid://bg2csofh4l18l" path="res://art/CuteSlime_Hop.png" id="3_dirf7"]
+[ext_resource type="Script" uid="uid://d30djwhepxyfp" path="res://characters/player/PlayerCamera.cs" id="4_idpv6"]
 [ext_resource type="Script" uid="uid://bhwk1nfu4aoxf" path="res://StateMachine/Character/Player/PlayerIdleState.cs" id="6_1jxqw"]
 [ext_resource type="Script" uid="uid://d12yksriwei62" path="res://StateMachine/Character/CharacterStateHandler.cs" id="6_n8jd0"]
 [ext_resource type="Script" uid="uid://3jvrh46wl7l7" path="res://StateMachine/Character/Player/PlayerWalkState.cs" id="7_dw050"]
@@ -364,6 +365,7 @@ radius = 7.0
 height = 40.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "abilitiesStateBranch") groups=["Prisoner"]]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_j31ep")
 camera = NodePath("Camera2D")
@@ -383,8 +385,8 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_1jxqw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+script = ExtResource("4_idpv6")
 
 [node name="CharacterStateHandler" type="Node" parent="."]
 script = ExtResource("6_n8jd0")

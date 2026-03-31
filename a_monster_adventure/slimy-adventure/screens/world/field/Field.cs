@@ -3,12 +3,12 @@ using System;
 
 public partial class Field : Node2D
 {
-	private TileMapLayer bridgesBellow;
+	private TileMapLayer bridgesBelow;
     private TileMapLayer bridgesAbove;
 
     public override void _Ready()
     {
-        bridgesBellow = GetNode<TileMapLayer>("BridgesBellow");
+        bridgesBelow = GetNode<TileMapLayer>("BridgesBelow");
         bridgesAbove = GetNode<TileMapLayer>("BridgesAbove");
 
         var layerSwitches = GetTree().GetNodesInGroup("BridgeSensor");
@@ -24,7 +24,7 @@ public partial class Field : Node2D
 
 	private void OnChangeLayer()
     {
-        bridgesBellow.Enabled = !bridgesBellow.Enabled;
+        bridgesBelow.Enabled = !bridgesBelow.Enabled;
         bridgesAbove.Enabled = !bridgesAbove.Enabled;
     }
 }
